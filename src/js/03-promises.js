@@ -23,17 +23,20 @@ function createPromise(position, delay) {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const firstDelay = parseInt(delayInput.value);
-      const step = parseInt(stepInput.value);
-      const amount = parseInt(amountInput.value);
+  const step = parseInt(stepInput.value);
+  const amount = parseInt(amountInput.value);
 
-      for (let i = 0; i < amount; i++) {
-        const delay = firstDelay + (i * step);
-        createPromise(i + 1, delay)
-          .then(({ position, delay }) => {
-            Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-          })
-          .catch(({ position, delay }) => {
-            Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-          });
-      }
+  if (firstDelay < 0 || step < 0 || amount <= 0) {
+    return  Notiflix.Notify.failure(`All values must be greater than zero`);
+  }
+  for (let i = 0; i < amount; i++) {
+    const delay = firstDelay + (i * step);
+    createPromise(i + 1, delay)
+      .then(({ position, delay }) => {
+        Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+      })
+      .catch(({ position, delay }) => {
+        Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+      });
+  }
 })
