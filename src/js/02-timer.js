@@ -29,7 +29,7 @@ const options = {
         
       btStart.addEventListener('click', () => {
         inputData.setAttribute('disabled', 'disabled')
-        intervalId = setInterval(() => {
+       const intervalId = setInterval(() => {
         const differenceInTime = selectedDates[0] - new Date();
 
         if (differenceInTime < 1000) {
