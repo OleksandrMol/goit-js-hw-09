@@ -28,14 +28,18 @@ const options = {
         btStart.removeAttribute('disabled', 'disabled');
         
       btStart.addEventListener('click', () => {
+        inputData.setAttribute('disabled', 'disabled')
         intervalId = setInterval(() => {
         const differenceInTime = selectedDates[0] - new Date();
 
         if (differenceInTime < 1000) {
           clearInterval(intervalId);
+          inputData.removeAttribute('disabled', 'disabled')
         }
           const result = convertMs(differenceInTime);
           btStart.setAttribute('disabled', 'disabled');
+          
+
         viewOfTimer(result);
       }, 1000);
       })
